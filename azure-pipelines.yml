@@ -43,6 +43,7 @@ steps:
       cd HeliPort-gsvordzttwrowbcpijzllgtczvfw/Build/Products/Debug/
       ls
       zip -r heliport.zip HeliPort.app
+      BD="$(date +"%Y-%m-%d")" # Build Date
 - task: GitHubRelease@1
   inputs:
     gitHubConnection: 'github.com_1hbb'
