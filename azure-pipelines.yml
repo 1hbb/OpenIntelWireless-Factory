@@ -51,3 +51,4 @@ steps:
     tagSource: 'gitTag'
     changeLogCompareToRelease: 'lastFullRelease'
     changeLogType: 'commitBased'
+    assets: '/Users/runner/Library/Developer/Xcode/DerivedData/HeliPort-gsvordzttwrowbcpijzllgtczvfw/Build/Products/Debug/heliport.zip'
