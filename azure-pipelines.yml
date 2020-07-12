@@ -93,10 +93,10 @@ steps:
     script: |
       #!/bin/bash
       cd /Users/runner/desktop/
-      mkdir "HeliPort&itlwm"
-      mv  /Users/runner/Library/Developer/Xcode/DerivedData/itlwm-abddpiaeqpzttlcatogytajfomqe/Build/Products/Debug/itlwm.kext /Users/runner/desktop/HeliPort&itlwm
-      mv /Users/runner/Library/Developer/Xcode/DerivedData/HeliPort-gsvordzttwrowbcpijzllgtczvfw/Build/Products/Debug/HeliPort.app /Users/runner/desktop/HeliPort&itlwm
-      zip -r HeliPort&itlwm.zip HeliPort&itlwm
+      mkdir "HeliPort-itlwm"
+      mv  /Users/runner/Library/Developer/Xcode/DerivedData/itlwm-abddpiaeqpzttlcatogytajfomqe/Build/Products/Debug/itlwm.kext /Users/runner/desktop/HeliPort-itlwm
+      mv /Users/runner/Library/Developer/Xcode/DerivedData/HeliPort-gsvordzttwrowbcpijzllgtczvfw/Build/Products/Debug/HeliPort.app /Users/runner/desktop/HeliPort-itlwm
+      zip -r HeliPort-itlwm.zip HeliPort-itlwm
       
 
 - task: GitHubRelease@1
@@ -107,7 +107,7 @@ steps:
     target: '$(Build.SourceVersion)'
     tag: '$(BuildDate)'
     title: '$(BuildDate)'
-    assets: '/Users/runner/desktop/HeliPort&itlwm.zip'
+    assets: '/Users/runner/desktop/HeliPort-itlwm.zip'
     isPreRelease: true
     addChangeLog: false
 
