@@ -22,6 +22,33 @@ steps:
       pod install
       pwd
 
+
+- task: Bash@3
+  displayName: Check Changes
+  inputs:
+    targetType: 'inline'
+    script: |
+      #!/bin/bash
+      git clone https://github.com/OpenIntelWireless/itlwm.git
+
+- task: Xcode@5
+  inputs:
+    actions: 'build'
+    scheme: 'fwgen'
+    sdk: 'macosx'
+    configuration: 'Debug'
+    xcWorkspacePath: '/Users/runner/work/1/s/itlwm/itlwm.xcodeproj'
+    xcodeVersion: 'default' # Options: 8, 9, 10, default, specifyPath
+
+- task: Xcode@5
+  inputs:
+    actions: 'build'
+    scheme: 'itlwm'
+    sdk: 'macosx'
+    configuration: 'Debug'
+    xcWorkspacePath: '/Users/runner/work/1/s/itlwm/itlwm.xcodeproj'
+    xcodeVersion: 'default' # Options: 8, 9, 10, default, specifyPath
+
 - task: Xcode@5
   inputs:
     actions: 'build'
