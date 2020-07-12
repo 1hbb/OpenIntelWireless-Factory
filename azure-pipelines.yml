@@ -44,7 +44,7 @@ steps:
       ls
       zip -r heliport.zip HeliPort.app
 
-- task: GitHubRelease@1
+- task: GitHubRelease@0
   inputs:
     gitHubConnection: release
     repositoryName: '$(Build.Repository.Name)'
