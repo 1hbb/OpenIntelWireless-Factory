@@ -44,3 +44,15 @@ steps:
       ls
       zip -r heliport.zip HeliPort.app
 
+- task: GitHubRelease@1
+  inputs:
+    gitHubConnection: release
+    repositoryName: '$(Build.Repository.Name)'
+    action: 'create'
+    target: '$(Build.SourceVersion)'
+    tagSource: 'gitTag'
+    assets: '/Users/runner/Library/Developer/Xcode/DerivedData/HeliPort-gsvordzttwrowbcpijzllgtczvfw/Build/Products/Debug/heliport.zip'
+    isDraft: true
+    isPreRelease: true
+    changeLogCompareToRelease: 'lastFullRelease'
+    changeLogType: 'commitBased'
