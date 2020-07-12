@@ -3,8 +3,8 @@
 # Add steps that install certificates, test, sign, and distribute an app, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/xcode
 
-trigger:
-- master
+trigger: none
+pr: none
 
 schedules:
 - cron: "0 */1 * * *"
