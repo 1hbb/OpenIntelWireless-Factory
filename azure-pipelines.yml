@@ -1,0 +1,45 @@
+# Xcode
+# Build, test, and archive an Xcode workspace on macOS.
+# Add steps that install certificates, test, sign, and distribute an app, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/xcode
+
+trigger:
+- master
+
+pool:
+  vmImage: 'macos-latest'
+
+steps:
+
+- task: Bash@3
+  displayName: Check Changes
+  inputs:
+    targetType: 'inline'
+    script: |
+      #!/bin/bash
+      git clone https://github.com/OpenIntelWireless/HeliPort.git
+      cd HeliPort
+      pod install
+      pwd
+
+- task: Xcode@5
+  inputs:
+    actions: 'build'
+    scheme: 'HeliPort'
+    sdk: 'macosx'
+    configuration: 'Debug'
+    xcWorkspacePath: 'HeliPort.xcworkspace'
+    xcodeVersion: 'default' # Options: 8, 9, 10, default, specifyPath
+
+- task: Bash@3
+  displayName: Check Changes
+  inputs:
+    targetType: 'inline'
+    script: |
+      #!/bin/bash
+      cd /Users/runner/Library/Developer/Xcode/DerivedData/
+      pwd
+      ls
+      cd HeliPort-hkjkwvwjocrwcpcplqplbvbvhfip/Build/Products/Debug/
+      ls
+      zip -r heliport.zip HeliPort.app
