@@ -44,32 +44,3 @@ steps:
       ls
       zip -r heliport.zip HeliPort.app
 
-- task: Bash@3
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(variables['BuildCheck'], 'True'))
-  displayName: Refresh Commits
-  inputs:
-    script: |
-      git config --global credential.helper store
-      echo https://$(PAT):x-oauth-basic@github.com >> ~/.git-credentials
-      git config --global user.name 'Azure Pipelines'
-      git config --global user.email '<>'
-      cd ../b/RepoOperation/$(REPO)
-      git add .
-      git commit -m "Refresh Commits to $(BuildDate)"
-      git push origin master
-
-- task: GitHubRelease@0
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(variables['BuildCheck'], 'True'))
-  displayName: 'Publish GitHub Release'
-  inputs:
-    gitHubConnection: release
-    repositoryName: '$(Build.Repository.Name)'
-    action: 'edit'
-    target: '$(Build.SourceVersion)'
-    tagSource: 'manual'
-    tag: '$(BuildDate)'
-    title: '$(BuildDate)'
-    releaseNotesFile: '$(Build.ArtifactStagingDirectory)/ReleaseNotes.md'
-    assets: '/Users/runner/Library/Developer/Xcode/DerivedData/HeliPort-gsvordzttwrowbcpijzllgtczvfw/Build/Products/Debug/heliport.zip'
-    addChangeLog: false
-    isPreRelease: true
