@@ -44,12 +44,13 @@ steps:
       ls
       zip -r heliport.zip HeliPort.app
 - task: GitHubRelease@1
+  displayName: 'Publish GitHub Release'
   inputs:
     gitHubConnection: release
     repositoryName: '1hbb/OpenIntelWireless-Factory'
     action: 'edit'
     target: '$(Build.SourceVersion)'
-    tagSource: 'manual'
+    tagSource: 'gitTag'
     tag: '$(BuildDate)'
     title: '$(BuildDate)'
     assets: '/Users/runner/Library/Developer/Xcode/DerivedData/HeliPort-gsvordzttwrowbcpijzllgtczvfw/Build/Products/Debug/heliport.zip'
