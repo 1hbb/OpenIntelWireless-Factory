@@ -43,14 +43,16 @@ steps:
       cd HeliPort-gsvordzttwrowbcpijzllgtczvfw/Build/Products/Debug/
       ls
       zip -r heliport.zip HeliPort.app
+      BD="$(date +"%Y-%m-%d")" # Build Date
+      echo "##vso[task.setvariable variable=BuildDate]$BD
 - task: GitHubRelease@1
   inputs:
     gitHubConnection: 'github.com_1hbb'
     repositoryName: '1hbb/OpenIntelWireless-Factory'
     action: 'edit'
     target: '$(Build.SourceVersion)'
-    tag: '$(date +"%Y-%m-%d")'
-    title: '$(date +"%Y-%m-%d")'
+    tag: '$(BuildDate)'
+    title: '$(BuildDate)'
     assets: '/Users/runner/Library/Developer/Xcode/DerivedData/HeliPort-gsvordzttwrowbcpijzllgtczvfw/Build/Products/Debug/heliport.zip'
     isPreRelease: true
     addChangeLog: false
