@@ -43,9 +43,9 @@ steps:
       cd HeliPort-gsvordzttwrowbcpijzllgtczvfw/Build/Products/Debug/
       ls
       zip -r heliport.zip HeliPort.app
-- task: GitHubRelease@1
+- task: GitHubRelease@0
   inputs:
-    gitHubConnection: edit
+    gitHubConnection: release
     repositoryName: '$(Build.Repository.Name)'
     action: 'edit'
     target: '$(Build.SourceVersion)'
