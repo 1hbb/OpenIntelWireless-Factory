@@ -40,6 +40,3 @@ steps:
       cd /Users/runner/Library/Developer/Xcode/DerivedData/
       pwd
       ls
-      cd HeliPort-hkjkwvwjocrwcpcplqplbvbvhfip/Build/Products/Debug/
-      ls
-      zip -r heliport.zip HeliPort.app
