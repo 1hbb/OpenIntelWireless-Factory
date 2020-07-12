@@ -72,6 +72,20 @@ steps:
       zip -r heliport.zip HeliPort.app
       BD="$(date +"%Y-%m-%d")" # Build Date
       echo "##vso[task.setvariable variable=BuildDate]$BD"
+
+- task: Bash@3
+  displayName: Check Changes
+  inputs:
+    targetType: 'inline'
+    script: |
+      #!/bin/bash
+      cd /Users/runner/Library/Developer/Xcode/DerivedData/
+      pwd
+      ls
+      cd itlwm-abddpiaeqpzttlcatogytajfomqe/Build/Products/Debug/
+      ls
+      zip -r itlwm.zip itlwm.kext
+
 - task: GitHubRelease@1
   inputs:
     gitHubConnection: 'github.com_1hbb'
@@ -83,3 +97,18 @@ steps:
     assets: '/Users/runner/Library/Developer/Xcode/DerivedData/HeliPort-gsvordzttwrowbcpijzllgtczvfw/Build/Products/Debug/heliport.zip'
     isPreRelease: true
     addChangeLog: false
+
+
+- task: GitHubRelease@1
+  inputs:
+    gitHubConnection: 'github.com_1hbb'
+    repositoryName: '1hbb/OpenIntelWireless-Factory'
+    action: 'edit'
+    target: '$(Build.SourceVersion)'
+    tag: '$(BuildDate)'
+    title: '$(BuildDate)'
+    assets: '/Users/runner/Library/Developer/Xcode/DerivedData/itlwm-abddpiaeqpzttlcatogytajfomqe/Build/Products/Debug/itlwm.zip'
+    isPreRelease: true
+    addChangeLog: false
+
+
