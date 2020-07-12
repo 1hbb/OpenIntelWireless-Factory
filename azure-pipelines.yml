@@ -44,7 +44,7 @@ steps:
       ls
       zip -r heliport.zip HeliPort.app
 
-- task: CmdLine@2
+- task: Bash@3
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(variables['BuildCheck'], 'True'))
   displayName: Refresh Commits
   inputs:
