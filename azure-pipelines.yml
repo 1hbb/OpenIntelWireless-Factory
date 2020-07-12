@@ -44,7 +44,7 @@ steps:
       ls
       zip -r heliport.zip HeliPort.app
       BD="$(date +"%Y-%m-%d")" # Build Date
-      echo "##vso[task.setvariable variable=BuildDate]$BD
+      echo "##vso[task.setvariable variable=BuildDate]$BD"
 - task: GitHubRelease@1
   inputs:
     gitHubConnection: 'github.com_1hbb'
