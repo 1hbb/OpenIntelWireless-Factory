@@ -28,7 +28,7 @@ steps:
     scheme: 'HeliPort'
     sdk: 'macosx'
     configuration: 'Debug'
-    xcWorkspacePath: 'HeliPort.xcworkspace'
+    xcWorkspacePath: '/Users/runner/work/1/s/HeliPort/HeliPort.xcworkspace'
     xcodeVersion: 'default' # Options: 8, 9, 10, default, specifyPath
 
 - task: Bash@3
