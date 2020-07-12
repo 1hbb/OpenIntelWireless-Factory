@@ -69,7 +69,7 @@ steps:
       ls
       cd HeliPort-gsvordzttwrowbcpijzllgtczvfw/Build/Products/Debug/
       ls
-      #zip -r heliport.zip HeliPort.app
+      
       BD="$(date +"%Y-%m-%d")" # Build Date
       echo "##vso[task.setvariable variable=BuildDate]$BD"
 
@@ -84,7 +84,7 @@ steps:
       ls
       cd itlwm-abddpiaeqpzttlcatogytajfomqe/Build/Products/Debug/
       ls
-      #zip -r itlwm.zip itlwm.kext
+      
 
 - task: Bash@3
   displayName: Check Changes
