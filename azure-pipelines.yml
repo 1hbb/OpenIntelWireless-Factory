@@ -43,19 +43,11 @@ steps:
       cd HeliPort-gsvordzttwrowbcpijzllgtczvfw/Build/Products/Debug/
       ls
       zip -r heliport.zip HeliPort.app
-
-- task: GitHubRelease@0
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(variables['BuildCheck'], 'True'))
-  displayName: 'Publish GitHub Release'
+- task: GitHubRelease@1
   inputs:
-    gitHubConnection: release
     repositoryName: '$(Build.Repository.Name)'
-    action: 'edit'
+    action: 'create'
     target: '$(Build.SourceVersion)'
-    tagSource: 'manual'
-    tag: '$(BuildDate)'
-    title: '$(BuildDate)'
-    releaseNotesFile: '$(Build.ArtifactStagingDirectory)/ReleaseNotes.md'
-    assets: '/Users/runner/Library/Developer/Xcode/DerivedData/HeliPort-gsvordzttwrowbcpijzllgtczvfw/Build/Products/Debug/heliport.zip'
-    addChangeLog: false
-    isPreRelease: true
+    tagSource: 'gitTag'
+    changeLogCompareToRelease: 'lastFullRelease'
+    changeLogType: 'commitBased'
