@@ -17,4 +17,9 @@
 </div>
 
 ## CREDITS
- Thank you for source <a href="https://github.com/williambj1">williambj1</a> 
+ <ul>
+  <li>Thank you for source <a href="https://github.com/williambj1">williambj1</a> 
+ </li>
+ <li>OpenIntelWireless <a href="https://github.com/OpenIntelWireless">OpenIntelWireless</a> </li>
+</ul> 
+ 
