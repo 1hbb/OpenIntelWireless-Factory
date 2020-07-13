@@ -1,10 +1,10 @@
-<h1 align="center" > Open Intel Wireless Factory </h1>
+<h1 align="center" >Unofficial Open Intel Wireless Factory </h1>
 <br/>
 <br/>
 <br/>
 <div align="center" >
  AUTO COMPİLED(Every 8 Hours) itlwm.kext&HeliPort.app <br/>
- <sub> Warning! Kext and App Not Tested. </sub>
+ <sub> Warning! Kext and App Not Tested. This project is not officially supported by OpenIntelWireless. </sub>
 </div>
 <br/>
 
