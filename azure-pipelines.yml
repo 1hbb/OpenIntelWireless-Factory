@@ -20,7 +20,7 @@ pool:
 steps:
 
 - task: Bash@3
-  displayName: Check Changes
+  displayName: Clone Heliport & Install pods
   inputs:
     targetType: 'inline'
     script: |
@@ -32,7 +32,7 @@ steps:
 
 
 - task: Bash@3
-  displayName: Check Changes
+  displayName: Clone itlwm
   inputs:
     targetType: 'inline'
     script: |
@@ -40,6 +40,7 @@ steps:
       git clone https://github.com/OpenIntelWireless/itlwm.git
 
 - task: Xcode@5
+  displayName: Build fwgen scheme
   inputs:
     actions: 'build'
     scheme: 'fwgen'
@@ -49,6 +50,7 @@ steps:
     xcodeVersion: 'default' # Options: 8, 9, 10, default, specifyPath
 
 - task: Xcode@5
+  displayName: Build itlwm
   inputs:
     actions: 'build'
     scheme: 'itlwm'
@@ -58,6 +60,18 @@ steps:
     xcodeVersion: 'default' # Options: 8, 9, 10, default, specifyPath
 
 - task: Xcode@5
+  displayName: Build itlwmx
+  inputs:
+    actions: 'build'
+    scheme: 'itlwmx'
+    sdk: 'macosx'
+    configuration: 'Debug'
+    xcWorkspacePath: '/Users/runner/work/1/s/itlwm/itlwm.xcodeproj'
+    xcodeVersion: 'default' # Options: 8, 9, 10, default, specifyPath
+
+
+- task: Xcode@5
+  displayName: Build HeliPort
   inputs:
     actions: 'build'
     scheme: 'HeliPort'
@@ -67,7 +81,7 @@ steps:
     xcodeVersion: 'default' # Options: 8, 9, 10, default, specifyPath
 
 - task: Bash@3
-  displayName: Check Changes
+  displayName: Check HeliPort.app
   inputs:
     targetType: 'inline'
     script: |
@@ -82,7 +96,7 @@ steps:
       echo "##vso[task.setvariable variable=BuildDate]$BD"
 
 - task: Bash@3
-  displayName: Check Changes
+  displayName: Check itlwm.kext & itlwmx.kext
   inputs:
     targetType: 'inline'
     script: |
@@ -95,19 +109,21 @@ steps:
       
 
 - task: Bash@3
-  displayName: Check Changes
+  displayName: Prepare Release Zip File
   inputs:
     targetType: 'inline'
     script: |
       #!/bin/bash
       cd /Users/runner/desktop/
-      mkdir "HeliPort-itlwm"
-      mv  /Users/runner/Library/Developer/Xcode/DerivedData/itlwm-abddpiaeqpzttlcatogytajfomqe/Build/Products/Debug/itlwm.kext /Users/runner/desktop/HeliPort-itlwm
-      mv /Users/runner/Library/Developer/Xcode/DerivedData/HeliPort-gsvordzttwrowbcpijzllgtczvfw/Build/Products/Debug/HeliPort.app /Users/runner/desktop/HeliPort-itlwm
-      zip -r HeliPort-itlwm.zip HeliPort-itlwm
-      
+      mkdir "HeliPort-itlwm-itlwmx"
+      mv  /Users/runner/Library/Developer/Xcode/DerivedData/itlwm-abddpiaeqpzttlcatogytajfomqe/Build/Products/Debug/itlwm.kext /Users/runner/desktop/HeliPort-itlwm-itlwmx
+      mv  /Users/runner/Library/Developer/Xcode/DerivedData/itlwm-abddpiaeqpzttlcatogytajfomqe/Build/Products/Debug/itlwmx.kext /Users/runner/desktop/HeliPort-itlwm-itlwmx
+      mv /Users/runner/Library/Developer/Xcode/DerivedData/HeliPort-gsvordzttwrowbcpijzllgtczvfw/Build/Products/Debug/HeliPort.app /Users/runner/desktop/HeliPort-itlwm-itlwmx
+      zip -r HeliPort-itlwm-itlwmx.zip HeliPort-itlwm-itlwmx
+
 
 - task: GitHubRelease@1
+  displayName: Github Release Assets
   inputs:
     gitHubConnection: 'github.com_1hbb'
     repositoryName: '1hbb/OpenIntelWireless-Factory'
@@ -115,9 +131,8 @@ steps:
     target: '$(Build.SourceVersion)'
     tag: '$(BuildDate)'
     title: '$(BuildDate)'
-    assets: '/Users/runner/desktop/HeliPort-itlwm.zip'
+    assets: '/Users/runner/desktop/HeliPort-itlwm-itlwmx.zip'
+    assetUploadMode: 'replace'
     isPreRelease: true
+    changeLogCompareToRelease: 'lastNonDraftRelease'
     addChangeLog: false
-
-
-
