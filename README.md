@@ -1,4 +1,4 @@
-<h1 align="center" >Unofficial Open Intel Wireless Factory </h1>
+<h1 align="center" >Open Intel Wireless Factory </h1>
 <br/>
 <br/>
 <br/>
