@@ -117,7 +117,7 @@ steps:
     title: '$(BuildDate)'
     assets: '/Users/runner/desktop/HeliPort-itlwm.zip'
     isPreRelease: true
-    addChangeLog: false
+    addChangeLog: true
 
 
 
