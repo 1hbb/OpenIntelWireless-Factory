@@ -12,7 +12,7 @@
 <div align="center" >
  <img alt="GitHub All Releases" src="https://img.shields.io/github/downloads/1hbb/OpenIntelWireless-Factory/total">  
  <img alt="GitHub" src="https://img.shields.io/github/license/1hbb/OpenIntelWireless-Factory">
- <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/OpenIntelWireless-Factory">
+ <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/1hbb/OpenIntelWireless-Factory?include_prereleases">
  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/1hbb/OpenIntelWireless-Factory">
 </div>
 
