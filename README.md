@@ -17,4 +17,4 @@
 </div>
 
 ## CREDITS
- Thank you <a href="https://github.com/williambj1/OpenCore-Factory">williambj1</a> 
+ Thank you for source <a href="https://github.com/williambj1">williambj1</a> 
