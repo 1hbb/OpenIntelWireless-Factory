@@ -29,6 +29,12 @@ steps:
       cd HeliPort
       pod install
       pwd
+      [ -e /Users/runner/work/1/s/changelog.md  ] && rm /Users/runner/work/1/s/changelog.md
+      echo "# Release Notes" >> /Users/runner/work/1/s/changelog.md
+      echo "## Latest HeliPort Changes " >> /Users/runner/work/1/s/changelog.md
+      echo "*" $(git log -n 1 --skip 0  --pretty=%B) >> /Users/runner/work/1/s/changelog.md
+      echo "*" $(git log -n 1 --skip 1  --pretty=%B) >> /Users/runner/work/1/s/changelog.md
+      echo "*" $(git log -n 1 --skip 2  --pretty=%B) >> /Users/runner/work/1/s/changelog.md
 
 
 - task: Bash@3
@@ -38,6 +44,11 @@ steps:
     script: |
       #!/bin/bash
       git clone https://github.com/OpenIntelWireless/itlwm.git
+      cd itlwm
+      echo "## Latest itlwm Changes" >> /Users/runner/work/1/s/changelog.md
+      echo "*" $(git log -n 1 --skip 0  --pretty=%B) >> /Users/runner/work/1/s/changelog.md
+      echo "*" $(git log -n 1 --skip 1  --pretty=%B) >> /Users/runner/work/1/s/changelog.md
+      echo "*" $(git log -n 1 --skip 2  --pretty=%B) >> /Users/runner/work/1/s/changelog.md
 
 - task: Xcode@5
   displayName: Build fwgen scheme
