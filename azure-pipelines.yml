@@ -142,7 +142,6 @@ steps:
     target: '$(Build.SourceVersion)'
     tag: '$(BuildDate)'
     title: '$(BuildDate)'
-    releaseNotesFilePath: '/Users/runner/work/1/s/changelog.md'
     assets: '/Users/runner/desktop/HeliPort-itlwm-itlwmx.zip'
     assetUploadMode: 'replace'
     isPreRelease: true
