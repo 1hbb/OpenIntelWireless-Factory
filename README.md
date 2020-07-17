@@ -3,7 +3,7 @@
 <br/>
 <br/>
 <div align="center" >
- AUTO COMPİLED(Every 8 Hours) itlwm.kext, itlwmx.kext, HeliPort.app <br/>
+ Auto Compiled(Every 8 Hours with latest changes) itlwm.kext, itlwmx.kext, HeliPort.app <br/>
  <sub> Warning! Kext and App Not Tested. This project is not officially supported by OpenIntelWireless. </sub>
 </div>
 <br/>
