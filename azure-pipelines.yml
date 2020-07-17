@@ -61,6 +61,16 @@ steps:
     xcodeVersion: 'default' # Options: 8, 9, 10, default, specifyPath
 
 - task: Xcode@5
+  displayName: Build fwgenx scheme
+  inputs:
+    actions: 'build'
+    scheme: 'fwgenx'
+    sdk: 'macosx'
+    configuration: 'Debug'
+    xcWorkspacePath: '/Users/runner/work/1/s/itlwm/itlwm.xcodeproj'
+    xcodeVersion: 'default' # Options: 8, 9, 10, default, specifyPath
+
+- task: Xcode@5
   displayName: Build itlwm
   inputs:
     actions: 'build'
