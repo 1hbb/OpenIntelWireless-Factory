@@ -64,7 +64,7 @@ steps:
   displayName: Build fwgenx scheme
   inputs:
     actions: 'build'
-    scheme: 'fwgenx'
+    scheme: 'fw_genx'
     sdk: 'macosx'
     configuration: 'Debug'
     xcWorkspacePath: '/Users/runner/work/1/s/itlwm/itlwm.xcodeproj'
