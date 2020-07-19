@@ -7,8 +7,8 @@ trigger: none
 pr: none
 
 schedules:
-- cron: "0 0,8,12,18 * * *"
-  displayName: Schedule Build
+- cron: "0 */8 * * *"
+  displayName: Schedule
   branches:
     include:
     - master
