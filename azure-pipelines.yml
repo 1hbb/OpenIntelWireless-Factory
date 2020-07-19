@@ -7,7 +7,7 @@ trigger: none
 pr: none
 
 schedules:
-- cron: '0 */8 * * *'
+- cron: "0 0,8,12,18 * * *"
   displayName: Schedule Build
   branches:
     include:
@@ -56,6 +56,7 @@ steps:
   inputs:
     actions: 'build'
     scheme: 'fwgen'
+    signingOption: 'default'
     sdk: 'macosx'
     configuration: 'Debug'
     xcWorkspacePath: '/Users/runner/work/1/s/itlwm/itlwm.xcodeproj'
@@ -66,6 +67,7 @@ steps:
   inputs:
     actions: 'build'
     scheme: 'fw_genx'
+    signingOption: 'default'
     sdk: 'macosx'
     configuration: 'Debug'
     xcWorkspacePath: '/Users/runner/work/1/s/itlwm/itlwm.xcodeproj'
@@ -76,6 +78,7 @@ steps:
   inputs:
     actions: 'build'
     scheme: 'itlwm'
+    signingOption: 'default'
     sdk: 'macosx'
     configuration: 'Debug'
     xcWorkspacePath: '/Users/runner/work/1/s/itlwm/itlwm.xcodeproj'
@@ -86,6 +89,7 @@ steps:
   inputs:
     actions: 'build'
     scheme: 'itlwmx'
+    signingOption: 'default'
     sdk: 'macosx'
     configuration: 'Debug'
     xcWorkspacePath: '/Users/runner/work/1/s/itlwm/itlwm.xcodeproj'
@@ -97,6 +101,7 @@ steps:
   inputs:
     actions: 'build'
     scheme: 'HeliPort'
+    signingOption: 'default'
     sdk: 'macosx'
     configuration: 'Debug'
     xcWorkspacePath: '/Users/runner/work/1/s/HeliPort/HeliPort.xcworkspace'
