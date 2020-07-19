@@ -7,7 +7,7 @@ trigger: none
 pr: none
 
 schedules:
-- cron: "0 */8 * * *"
+- cron: "0 0,8,12,18 * * *"
   displayName: Schedule Build
   branches:
     include:
@@ -28,6 +28,7 @@ steps:
       git clone https://github.com/OpenIntelWireless/HeliPort.git
       cd HeliPort
       pod install
+      brew install swiftlint
       pwd
       [ -e /Users/runner/work/1/s/changelog.md  ] && rm /Users/runner/work/1/s/changelog.md
       echo "# Release Notes" >> /Users/runner/work/1/s/changelog.md
