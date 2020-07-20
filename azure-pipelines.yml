@@ -8,7 +8,7 @@ pr: none
 
 schedules:
 - cron: "0 */8 * * *"
-  displayName: Schedule Compile Kext And HeliPort
+  displayName: Schedule Compile Kext
   branches:
     include:
     - master
