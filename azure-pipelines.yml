@@ -116,7 +116,7 @@ steps:
       cd /Users/runner/Library/Developer/Xcode/DerivedData/
       pwd
       ls
-      cd HeliPort-gsvordzttwrowbcpijzllgtczvfw/Build/Products/Debug/
+      cd HeliPort-gsvordzttwrowbcpijzllgtczvfw/Build/Products/Release/
       ls
       
       BD="$(date +"%Y-%m-%d")" # Build Date
@@ -131,7 +131,7 @@ steps:
       cd /Users/runner/Library/Developer/Xcode/DerivedData/
       pwd
       ls
-      cd itlwm-abddpiaeqpzttlcatogytajfomqe/Build/Products/Debug/
+      cd itlwm-abddpiaeqpzttlcatogytajfomqe/Build/Products/Release/
       ls
       
 
@@ -143,9 +143,9 @@ steps:
       #!/bin/bash
       cd /Users/runner/desktop/
       mkdir "HeliPort-itlwm-itlwmx"
-      mv  /Users/runner/Library/Developer/Xcode/DerivedData/itlwm-abddpiaeqpzttlcatogytajfomqe/Build/Products/Debug/itlwm.kext /Users/runner/desktop/HeliPort-itlwm-itlwmx
-      mv  /Users/runner/Library/Developer/Xcode/DerivedData/itlwm-abddpiaeqpzttlcatogytajfomqe/Build/Products/Debug/itlwmx.kext /Users/runner/desktop/HeliPort-itlwm-itlwmx
-      mv /Users/runner/Library/Developer/Xcode/DerivedData/HeliPort-gsvordzttwrowbcpijzllgtczvfw/Build/Products/Debug/HeliPort.app /Users/runner/desktop/HeliPort-itlwm-itlwmx
+      mv  /Users/runner/Library/Developer/Xcode/DerivedData/itlwm-abddpiaeqpzttlcatogytajfomqe/Build/Products/Release/itlwm.kext /Users/runner/desktop/HeliPort-itlwm-itlwmx
+      mv  /Users/runner/Library/Developer/Xcode/DerivedData/itlwm-abddpiaeqpzttlcatogytajfomqe/Build/Products/Release/itlwmx.kext /Users/runner/desktop/HeliPort-itlwm-itlwmx
+      mv /Users/runner/Library/Developer/Xcode/DerivedData/HeliPort-gsvordzttwrowbcpijzllgtczvfw/Build/Products/Release/HeliPort.app /Users/runner/desktop/HeliPort-itlwm-itlwmx
       zip -r HeliPort-itlwm-itlwmx.zip HeliPort-itlwm-itlwmx
 
 
