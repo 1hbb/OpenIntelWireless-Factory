@@ -58,7 +58,7 @@ steps:
     scheme: 'fwgen'
     signingOption: 'default'
     sdk: 'macosx'
-    configuration: 'Debug'
+    configuration: 'Release'
     xcWorkspacePath: '/Users/runner/work/1/s/itlwm/itlwm.xcodeproj'
     xcodeVersion: 'default' # Options: 8, 9, 10, default, specifyPath
 
@@ -69,7 +69,7 @@ steps:
     scheme: 'fw_genx'
     signingOption: 'default'
     sdk: 'macosx'
-    configuration: 'Debug'
+    configuration: 'Release'
     xcWorkspacePath: '/Users/runner/work/1/s/itlwm/itlwm.xcodeproj'
     xcodeVersion: 'default' # Options: 8, 9, 10, default, specifyPath
 
@@ -80,7 +80,7 @@ steps:
     scheme: 'itlwm'
     signingOption: 'default'
     sdk: 'macosx'
-    configuration: 'Debug'
+    configuration: 'Release'
     xcWorkspacePath: '/Users/runner/work/1/s/itlwm/itlwm.xcodeproj'
     xcodeVersion: 'default' # Options: 8, 9, 10, default, specifyPath
 
@@ -91,7 +91,7 @@ steps:
     scheme: 'itlwmx'
     signingOption: 'default'
     sdk: 'macosx'
-    configuration: 'Debug'
+    configuration: 'Release'
     xcWorkspacePath: '/Users/runner/work/1/s/itlwm/itlwm.xcodeproj'
     xcodeVersion: 'default' # Options: 8, 9, 10, default, specifyPath
 
@@ -103,7 +103,7 @@ steps:
     scheme: 'HeliPort'
     signingOption: 'default'
     sdk: 'macosx'
-    configuration: 'Debug'
+    configuration: 'Release'
     xcWorkspacePath: '/Users/runner/work/1/s/HeliPort/HeliPort.xcworkspace'
     xcodeVersion: 'default' # Options: 8, 9, 10, default, specifyPath
 
