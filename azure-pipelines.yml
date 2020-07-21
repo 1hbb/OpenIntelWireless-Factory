@@ -8,7 +8,7 @@ pr: none
 
 schedules:
 - cron: "0 */8 * * *"
-  displayName: Schedule Compile Kext
+  displayName: Schedule Try Demo
   branches:
     include:
     - master
@@ -25,17 +25,48 @@ steps:
     targetType: 'inline'
     script: |
       #!/bin/bash
+      DIR=$PWD
+      mkdir "HeliPort-itlwm-itlwmx"
       git clone https://github.com/OpenIntelWireless/HeliPort.git
       cd HeliPort
       pod install
       brew install swiftlint
+
+- task: Bash@3
+  displayName: Build HeliPort
+  inputs:
+    targetType: 'inline'
+    script: |
+      #!/bin/bash
+      DIR=$PWD
+      cd HeliPort
+      xcodebuild -workspace HeliPort.xcworkspace -scheme HeliPort -sdk macosx -configuration Release archive -archivePath $PWD/build/HeliPort.xcarchive
+      cd $PWD/build/HeliPort.xcarchive/Products/Applications/
       pwd
-      [ -e /Users/runner/work/1/s/changelog.md  ] && rm /Users/runner/work/1/s/changelog.md
-      echo "# Release Notes" >> /Users/runner/work/1/s/changelog.md
-      echo "## Latest HeliPort Changes " >> /Users/runner/work/1/s/changelog.md
-      echo "*" "$(git log -n 1 --skip 0  --pretty=%B)" >> /Users/runner/work/1/s/changelog.md
-      echo "*" "$(git log -n 1 --skip 1  --pretty=%B)" >> /Users/runner/work/1/s/changelog.md
-      echo "*" "$(git log -n 1 --skip 2  --pretty=%B)" >> /Users/runner/work/1/s/changelog.md
+      mv HeliPort.app $DIR/HeliPort-itlwm-itlwmx
+      cd $DIR/HeliPort
+      [ -e changelog.md  ] && rm changelog.md
+      echo "# Release Notes" >> changelog.md
+      echo "## Latest HeliPort Changes " >> $DIR/changelog.md
+      echo "*" "$(git log -n 1 --skip 0  --pretty=%B)" >> $DIR/changelog.md
+      echo "*" "$(git log -n 1 --skip 1  --pretty=%B)" >> $DIR/changelog.md
+      echo "*" "$(git log -n 1 --skip 2  --pretty=%B)" >> $DIR/changelog.md
+
+
+- task: Bash@3
+  displayName: Get Latest Changes From HeliPort
+  inputs:
+    targetType: 'inline'
+    script: |
+      #!/bin/bash
+      DIR=$PWD
+      cd HeliPort
+      [ -e $DIR/changelog.md  ] && rm $DIR/changelog.md
+      echo "# Release Notes" >> $DIR/changelog.md
+      echo "## Latest HeliPort Changes " >> $DIR/changelog.md
+      echo "*" "$(git log -n 1 --skip 0  --pretty=%B)" >> $DIR/changelog.md
+      echo "*" "$(git log -n 1 --skip 1  --pretty=%B)" >> $DIR/changelog.md
+      echo "*" "$(git log -n 1 --skip 2  --pretty=%B)" >> $DIR/changelog.md
 
 
 - task: Bash@3
@@ -44,96 +75,48 @@ steps:
     targetType: 'inline'
     script: |
       #!/bin/bash
+      DIR=$PWD
+      ls
       git clone https://github.com/OpenIntelWireless/itlwm.git
-      cd itlwm
-      echo "## Latest itlwm Changes" >> /Users/runner/work/1/s/changelog.md
-      echo "*" "$(git log -n 1 --skip 0  --pretty=%B)" >> /Users/runner/work/1/s/changelog.md
-      echo "*" "$(git log -n 1 --skip 1  --pretty=%B)" >> /Users/runner/work/1/s/changelog.md
-      echo "*" "$(git log -n 1 --skip 2  --pretty=%B)" >> /Users/runner/work/1/s/changelog.md
 
-- task: Xcode@5
-  displayName: Build fwgen scheme
-  inputs:
-    actions: 'build'
-    scheme: 'fwgen'
-    signingOption: 'default'
-    sdk: 'macosx'
-    configuration: 'Release'
-    xcWorkspacePath: '/Users/runner/work/1/s/itlwm/itlwm.xcodeproj'
-    xcodeVersion: 'default' # Options: 8, 9, 10, default, specifyPath
-
-- task: Xcode@5
-  displayName: Build fwgenx scheme
-  inputs:
-    actions: 'build'
-    scheme: 'fw_genx'
-    signingOption: 'default'
-    sdk: 'macosx'
-    configuration: 'Release'
-    xcWorkspacePath: '/Users/runner/work/1/s/itlwm/itlwm.xcodeproj'
-    xcodeVersion: 'default' # Options: 8, 9, 10, default, specifyPath
-
-- task: Xcode@5
+- task: Bash@3
   displayName: Build itlwm
   inputs:
-    actions: 'build'
-    scheme: 'itlwm'
-    signingOption: 'default'
-    sdk: 'macosx'
-    configuration: 'Release'
-    xcWorkspacePath: '/Users/runner/work/1/s/itlwm/itlwm.xcodeproj'
-    xcodeVersion: 'default' # Options: 8, 9, 10, default, specifyPath
-
-- task: Xcode@5
-  displayName: Build itlwmx
-  inputs:
-    actions: 'build'
-    scheme: 'itlwmx'
-    signingOption: 'default'
-    sdk: 'macosx'
-    configuration: 'Release'
-    xcWorkspacePath: '/Users/runner/work/1/s/itlwm/itlwm.xcodeproj'
-    xcodeVersion: 'default' # Options: 8, 9, 10, default, specifyPath
-
-
-- task: Xcode@5
-  displayName: Build HeliPort
-  inputs:
-    actions: 'build'
-    scheme: 'HeliPort'
-    signingOption: 'default'
-    sdk: 'macosx'
-    configuration: 'Release'
-    xcWorkspacePath: '/Users/runner/work/1/s/HeliPort/HeliPort.xcworkspace'
-    xcodeVersion: 'default' # Options: 8, 9, 10, default, specifyPath
+    targetType: 'inline'
+    script: |
+      #!/bin/bash
+      DIR=$PWD
+      cd itlwm
+      xcodebuild -project itlwm.xcodeproj -target fwgen -configuration Release -sdk macosx
+      xcodebuild -project itlwm.xcodeproj -target fw_genx -configuration Release -sdk macosx
+      xcodebuild -project itlwm.xcodeproj -target itlwm -configuration Release -sdk macosx
+      xcodebuild -project itlwm.xcodeproj -target itlwmx -configuration Release -sdk macosx
+      cd build/Release
+      ls
+      mv itlwm.kext $DIR/HeliPort-itlwm-itlwmx
+      mv itlwmx.kext $DIR/HeliPort-itlwm-itlwmx
 
 - task: Bash@3
-  displayName: Check HeliPort.app
+  displayName: Get Latest Changes From itlwm
   inputs:
     targetType: 'inline'
     script: |
       #!/bin/bash
-      cd /Users/runner/Library/Developer/Xcode/DerivedData/
-      pwd
-      ls
-      cd HeliPort-gsvordzttwrowbcpijzllgtczvfw/Build/Products/Release/
-      ls
-      
+      DIR=$PWD
+      cd itlwm
+      echo "## Latest itlwm Changes" >> $DIR/changelog.md
+      echo "*" "$(git log -n 1 --skip 0  --pretty=%B)" >> $DIR/changelog.md
+      echo "*" "$(git log -n 1 --skip 1  --pretty=%B)" >> $DIR/changelog.md
+      echo "*" "$(git log -n 1 --skip 2  --pretty=%B)" >> $DIR/changelog.md
+
+- task: Bash@3
+  displayName: Set BuildDate variable for release tag
+  inputs:
+    targetType: 'inline'
+    script: |
+      #!/bin/bash
       BD="$(date +"%Y-%m-%d")" # Build Date
       echo "##vso[task.setvariable variable=BuildDate]$BD"
-
-- task: Bash@3
-  displayName: Check itlwm.kext & itlwmx.kext
-  inputs:
-    targetType: 'inline'
-    script: |
-      #!/bin/bash
-      cd /Users/runner/Library/Developer/Xcode/DerivedData/
-      pwd
-      ls
-      cd itlwm-abddpiaeqpzttlcatogytajfomqe/Build/Products/Release/
-      ls
-      
 
 - task: Bash@3
   displayName: Prepare Release Zip File
@@ -141,11 +124,6 @@ steps:
     targetType: 'inline'
     script: |
       #!/bin/bash
-      cd /Users/runner/desktop/
-      mkdir "HeliPort-itlwm-itlwmx"
-      mv  /Users/runner/Library/Developer/Xcode/DerivedData/itlwm-abddpiaeqpzttlcatogytajfomqe/Build/Products/Release/itlwm.kext /Users/runner/desktop/HeliPort-itlwm-itlwmx
-      mv  /Users/runner/Library/Developer/Xcode/DerivedData/itlwm-abddpiaeqpzttlcatogytajfomqe/Build/Products/Release/itlwmx.kext /Users/runner/desktop/HeliPort-itlwm-itlwmx
-      mv /Users/runner/Library/Developer/Xcode/DerivedData/HeliPort-gsvordzttwrowbcpijzllgtczvfw/Build/Products/Release/HeliPort.app /Users/runner/desktop/HeliPort-itlwm-itlwmx
       zip -r HeliPort-itlwm-itlwmx.zip HeliPort-itlwm-itlwmx
 
 
@@ -153,13 +131,13 @@ steps:
   displayName: Github Release Assets
   inputs:
     gitHubConnection: 'github.com_1hbb'
-    repositoryName: '1hbb/OpenIntelWireless-Factory'
+    repositoryName: '$(Build.Repository.Name)'
     action: 'edit'
     target: '$(Build.SourceVersion)'
     tag: '$(BuildDate)'
     title: '$(BuildDate)'
-    releaseNotesFilePath: '/Users/runner/work/1/s/changelog.md'
-    assets: '/Users/runner/desktop/HeliPort-itlwm-itlwmx.zip'
+    releaseNotesFilePath: 'changelog.md'
+    assets: '*.zip'
     assetUploadMode: 'replace'
     isPreRelease: true
     changeLogCompareToRelease: 'lastNonDraftRelease'
