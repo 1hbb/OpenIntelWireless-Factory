@@ -33,7 +33,6 @@ You can download latest compiled kext and app in <a href="https://github.com/1hb
 
 ## CREDITS
  <ul>
-  <li>Thank you for source <a href="https://github.com/williambj1">williambj1</a> 
  </li>
  <li><a href="https://github.com/OpenIntelWireless">OpenIntelWireless</a> </li>
 </ul> 
