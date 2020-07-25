@@ -44,13 +44,6 @@ steps:
       cd $PWD/build/HeliPort.xcarchive/Products/Applications/
       pwd
       mv HeliPort.app $DIR/HeliPort-itlwm-itlwmx
-      cd $DIR/HeliPort
-      [ -e changelog.md  ] && rm changelog.md
-      echo "# Release Notes" >> changelog.md
-      echo "## Latest HeliPort Changes " >> $DIR/changelog.md
-      echo "*" "$(git log -n 1 --skip 0  --pretty=%B)" >> $DIR/changelog.md
-      echo "*" "$(git log -n 1 --skip 1  --pretty=%B)" >> $DIR/changelog.md
-      echo "*" "$(git log -n 1 --skip 2  --pretty=%B)" >> $DIR/changelog.md
 
 
 - task: Bash@3
@@ -62,8 +55,8 @@ steps:
       DIR=$PWD
       cd HeliPort
       [ -e $DIR/changelog.md  ] && rm $DIR/changelog.md
-      echo "# Release Notes" >> $DIR/changelog.md
-      echo "## Latest HeliPort Changes " >> $DIR/changelog.md
+      echo "### Release Notes" >> $DIR/changelog.md
+      echo "#### Latest HeliPort Changes " >> $DIR/changelog.md
       echo "*" "$(git log -n 1 --skip 0  --pretty=%B)" >> $DIR/changelog.md
       echo "*" "$(git log -n 1 --skip 1  --pretty=%B)" >> $DIR/changelog.md
       echo "*" "$(git log -n 1 --skip 2  --pretty=%B)" >> $DIR/changelog.md
@@ -104,7 +97,7 @@ steps:
       #!/bin/bash
       DIR=$PWD
       cd itlwm
-      echo "## Latest itlwm Changes" >> $DIR/changelog.md
+      echo "#### Latest itlwm Changes" >> $DIR/changelog.md
       echo "*" "$(git log -n 1 --skip 0  --pretty=%B)" >> $DIR/changelog.md
       echo "*" "$(git log -n 1 --skip 1  --pretty=%B)" >> $DIR/changelog.md
       echo "*" "$(git log -n 1 --skip 2  --pretty=%B)" >> $DIR/changelog.md
