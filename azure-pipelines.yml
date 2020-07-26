@@ -72,6 +72,17 @@ steps:
       ls
       git clone https://github.com/OpenIntelWireless/itlwm.git
 
+
+- task: Bash@3
+  displayName: Install macOS 10.12 SDK
+  inputs:
+    targetType: 'inline'
+    script: |
+      #!/bin/bash
+      curl -L https://github.com/alexey-lysiuk/macos-sdk/releases/download/10.12/MacOSX10.12.tar.bz2 -o /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.tar.bz2 && tar -xjf /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.tar.bz2 -C /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/
+
+
+
 - task: Bash@3
   displayName: Build itlwm
   inputs:
@@ -80,10 +91,10 @@ steps:
       #!/bin/bash
       DIR=$PWD
       cd itlwm
-      xcodebuild -project itlwm.xcodeproj -target fw_gen -configuration Release -sdk macosx
-      xcodebuild -project itlwm.xcodeproj -target fw_genx -configuration Release -sdk macosx
-      xcodebuild -project itlwm.xcodeproj -target itlwm -configuration Release -sdk macosx
-      xcodebuild -project itlwm.xcodeproj -target itlwmx -configuration Release -sdk macosx
+      xcodebuild -project itlwm.xcodeproj -target fw_gen -configuration Release -sdk macosx10.12
+      xcodebuild -project itlwm.xcodeproj -target fw_genx -configuration Release -sdk macosx10.12
+      xcodebuild -project itlwm.xcodeproj -target itlwm -configuration Release -sdk macosx10.12
+      xcodebuild -project itlwm.xcodeproj -target itlwmx -configuration Release -sdk macosx10.12
       cd build/Release
       ls
       mv itlwm.kext $DIR/HeliPort-itlwm-itlwmx
