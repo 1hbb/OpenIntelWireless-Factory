@@ -91,14 +91,11 @@ steps:
       #!/bin/bash
       DIR=$PWD
       cd itlwm
-      xcodebuild -project itlwm.xcodeproj -target fw_gen -configuration Release -sdk macosx10.12
-      xcodebuild -project itlwm.xcodeproj -target fw_genx -configuration Release -sdk macosx10.12
+      xcodebuild -project itlwm.xcodeproj -target fw_gen -configuration Release -sdk macosx10.
       xcodebuild -project itlwm.xcodeproj -target itlwm -configuration Release -sdk macosx10.12
-      xcodebuild -project itlwm.xcodeproj -target itlwmx -configuration Release -sdk macosx10.12
       cd build/Release
       ls
       mv itlwm.kext $DIR/HeliPort-itlwm-itlwmx
-      mv itlwmx.kext $DIR/HeliPort-itlwm-itlwmx
 
 - task: Bash@3
   displayName: Get Latest Changes From itlwm
