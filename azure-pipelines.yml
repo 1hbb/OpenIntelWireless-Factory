@@ -26,7 +26,7 @@ steps:
     script: |
       #!/bin/bash
       DIR=$PWD
-      mkdir "HeliPort-itlwm-itlwmx"
+      mkdir "HeliPort-itlwm"
       git clone https://github.com/OpenIntelWireless/HeliPort.git
       cd HeliPort
       pod install
@@ -43,7 +43,7 @@ steps:
       xcodebuild -workspace HeliPort.xcworkspace -scheme HeliPort -sdk macosx -configuration Release archive -archivePath $PWD/build/HeliPort.xcarchive
       cd $PWD/build/HeliPort.xcarchive/Products/Applications/
       pwd
-      mv HeliPort.app $DIR/HeliPort-itlwm-itlwmx
+      mv HeliPort.app $DIR/HeliPort-itlwm
 
 
 - task: Bash@3
@@ -95,7 +95,7 @@ steps:
       xcodebuild -project itlwm.xcodeproj -target itlwm -configuration Release -sdk macosx10.12
       cd build/Release
       ls
-      mv itlwm.kext $DIR/HeliPort-itlwm-itlwmx
+      mv itlwm.kext $DIR/HeliPort-itlwm
 
 - task: Bash@3
   displayName: Get Latest Changes From itlwm
@@ -116,7 +116,7 @@ steps:
     targetType: 'inline'
     script: |
       #!/bin/bash
-      BD="$(date +"%Y-%m-%d")" # Build Date
+      BD="$(date +"%Y-%m-%d-%H:%M:%S")" # Build Date
       echo "##vso[task.setvariable variable=BuildDate]$BD"
 
 - task: Bash@3
@@ -125,7 +125,7 @@ steps:
     targetType: 'inline'
     script: |
       #!/bin/bash
-      zip -r HeliPort-itlwm-itlwmx.zip HeliPort-itlwm-itlwmx
+      zip -r HeliPort-itlwm.zip HeliPort-itlwm
 
 
 - task: GitHubRelease@1
