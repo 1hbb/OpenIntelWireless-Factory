@@ -116,7 +116,7 @@ steps:
     targetType: 'inline'
     script: |
       #!/bin/bash
-      BD="$(date +"%Y-%m-%d-%H:%M:%S")" # Build Date
+      BD="$(date +"%Y-%m-%d--%H-%M-%S")" # Build Date
       echo "##vso[task.setvariable variable=BuildDate]$BD"
 
 - task: Bash@3
