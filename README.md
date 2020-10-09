@@ -27,6 +27,7 @@ Intel WiFi Client for <a href="https://github.com/OpenIntelWireless/itlwm" >itlw
 - 7xxx: `7260`, `7265`
 - 9xxx：`9260`,`9461`, `9462`, `9560`
 - 22000：`ax200`
+- <a href="https://openintelwireless.github.io/itlwm/Compat.html">Supported Devices List</a>
 
 ## Download 
 You can download latest compiled kext and app in <a href="https://github.com/1hbb/OpenIntelWireless-Factory/releases">here</a>.
