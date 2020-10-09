@@ -132,7 +132,7 @@ steps:
     script: |
       #!/bin/bash
       zip -r HeliPort-itlwm.zip HeliPort-itlwm
-      zzip -r AirportItlwmAllVersions.zip AirportItlwmAllVersions
+      zip -r AirportItlwmAllVersions.zip AirportItlwmAllVersions
 
 
 - task: GitHubRelease@1
