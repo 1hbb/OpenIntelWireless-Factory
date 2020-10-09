@@ -27,6 +27,7 @@ steps:
       #!/bin/bash
       DIR=$PWD
       mkdir "HeliPort-itlwm"
+      mkdir "AirportItlwmAllVersions"
       git clone https://github.com/OpenIntelWireless/HeliPort.git
       cd HeliPort
       pod install
@@ -74,28 +75,32 @@ steps:
 
 
 - task: Bash@3
-  displayName: Install macOS 10.12 SDK
+  displayName: Install SDK
   inputs:
     targetType: 'inline'
     script: |
       #!/bin/bash
-      curl -L https://github.com/alexey-lysiuk/macos-sdk/releases/download/10.12/MacOSX10.12.tar.bz2 -o /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.tar.bz2 && tar -xjf /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.tar.bz2 -C /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/
+      git clone https://github.com/acidanthera/MacKernelSDK.git
 
 
 
 - task: Bash@3
-  displayName: Build itlwm
+  displayName: Build itlwm and AirportItlwm
   inputs:
     targetType: 'inline'
     script: |
       #!/bin/bash
       DIR=$PWD
       cd itlwm
-      xcodebuild -project itlwm.xcodeproj -target fw_gen -configuration Release -sdk macosx10.12
-      xcodebuild -project itlwm.xcodeproj -target itlwm -configuration Release -sdk macosx10.12
+      xcodebuild -project itlwm.xcodeproj -target fw_gen -configuration Release
+      xcodebuild -project itlwm.xcodeproj -alltargets -configuration Release
       cd build/Release
       ls
       mv itlwm.kext $DIR/HeliPort-itlwm
+      mv Big\ Sur $DIR/AirportItlwmAllVersions
+      mv Catalina $DIR/AirportItlwmAllVersions
+      mv High\ Sierra $DIR/AirportItlwmAllVersions
+      mv Mojave $DIR/AirportItlwmAllVersions
 
 - task: Bash@3
   displayName: Get Latest Changes From itlwm
@@ -126,6 +131,7 @@ steps:
     script: |
       #!/bin/bash
       zip -r HeliPort-itlwm.zip HeliPort-itlwm
+      zzip -r AirportItlwmAllVersions.zip AirportItlwmAllVersions
 
 
 - task: GitHubRelease@1
