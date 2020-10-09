@@ -137,7 +137,10 @@ steps:
       #!/bin/bash
       zip -r HeliPort.zip HeliPort
       zip -r itlwm.zip itlwm
-      zip -r AirportItlwmAllVersions.zip AirportItlwmAllVersions
+      zip -r AirportItlwm-Catalina.zip AirportItlwm-Catalina
+      zip -r AirportItlwm-BigSur.zip AirportItlwm-BigSur
+      zip -r AirportItlwm-Mojave.zip AirportItlwm-Mojave
+      zip -r AirportItlwm-HighSierra.zip AirportItlwm-HighSierra
 
 
 - task: GitHubRelease@1
