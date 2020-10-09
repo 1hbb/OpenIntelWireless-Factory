@@ -27,7 +27,7 @@ steps:
       #!/bin/bash
       DIR=$PWD
       mkdir "HeliPort"
-      mkdir "itlwm"
+      mkdir "itlwmkext"
       mkdir "AirportItlwm-HighSierra"
       mkdir "AirportItlwm-Mojave"
       mkdir "AirportItlwm-Catalina"
@@ -101,7 +101,7 @@ steps:
       xcodebuild -project itlwm.xcodeproj -alltargets -configuration Release
       cd build/Release
       ls
-      mv itlwm.kext $DIR/itlwm
+      mv itlwm.kext $DIR/itlwmkext
       mv Big\ Sur $DIR/AirportItlwm-BigSur
       mv Catalina $DIR/AirportItlwm-Catalina
       mv High\ Sierra $DIR/AirportItlwm-HighSierra
@@ -136,7 +136,7 @@ steps:
     script: |
       #!/bin/bash
       zip -r HeliPort.zip HeliPort
-      zip -r itlwm.zip itlwm
+      zip -r itlwmkext.zip itlwmkext
       zip -r AirportItlwm-Catalina.zip AirportItlwm-Catalina
       zip -r AirportItlwm-BigSur.zip AirportItlwm-BigSur
       zip -r AirportItlwm-Mojave.zip AirportItlwm-Mojave
