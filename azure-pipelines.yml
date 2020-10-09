@@ -26,7 +26,7 @@ steps:
     script: |
       #!/bin/bash
       DIR=$PWD
-      mkdir "HeliPort"
+      mkdir "HeliPortApp"
       mkdir "itlwmkext"
       mkdir "AirportItlwm-HighSierra"
       mkdir "AirportItlwm-Mojave"
@@ -48,7 +48,7 @@ steps:
       xcodebuild -workspace HeliPort.xcworkspace -scheme HeliPort -sdk macosx -configuration Release archive -archivePath $PWD/build/HeliPort.xcarchive
       cd $PWD/build/HeliPort.xcarchive/Products/Applications/
       pwd
-      mv HeliPort.app $DIR/HeliPort
+      mv HeliPort.app $DIR/HeliPortApp
 
 
 - task: Bash@3
@@ -135,7 +135,7 @@ steps:
     targetType: 'inline'
     script: |
       #!/bin/bash
-      zip -r HeliPort.zip HeliPort
+      zip -r HeliPortApp.zip HeliPortApp
       zip -r itlwmkext.zip itlwmkext
       zip -r AirportItlwm-Catalina.zip AirportItlwm-Catalina
       zip -r AirportItlwm-BigSur.zip AirportItlwm-BigSur
