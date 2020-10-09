@@ -26,8 +26,12 @@ steps:
     script: |
       #!/bin/bash
       DIR=$PWD
-      mkdir "HeliPort-itlwm"
-      mkdir "AirportItlwmAllVersions"
+      mkdir "HeliPort"
+      mkdir "itlwm"
+      mkdir "AirportItlwm-HighSierra"
+      mkdir "AirportItlwm-Mojave"
+      mkdir "AirportItlwm-Catalina"
+      mkdir "AirportItlwm-BigSur"
       git clone https://github.com/OpenIntelWireless/HeliPort.git
       cd HeliPort
       pod install
@@ -44,7 +48,7 @@ steps:
       xcodebuild -workspace HeliPort.xcworkspace -scheme HeliPort -sdk macosx -configuration Release archive -archivePath $PWD/build/HeliPort.xcarchive
       cd $PWD/build/HeliPort.xcarchive/Products/Applications/
       pwd
-      mv HeliPort.app $DIR/HeliPort-itlwm
+      mv HeliPort.app $DIR/HeliPort
 
 
 - task: Bash@3
@@ -97,11 +101,11 @@ steps:
       xcodebuild -project itlwm.xcodeproj -alltargets -configuration Release
       cd build/Release
       ls
-      mv itlwm.kext $DIR/HeliPort-itlwm
-      mv Big\ Sur $DIR/AirportItlwmAllVersions
-      mv Catalina $DIR/AirportItlwmAllVersions
-      mv High\ Sierra $DIR/AirportItlwmAllVersions
-      mv Mojave $DIR/AirportItlwmAllVersions
+      mv itlwm.kext $DIR/itlwm
+      mv Big\ Sur $DIR/AirportItlwm-BigSur
+      mv Catalina $DIR/AirportItlwm-Catalina
+      mv High\ Sierra $DIR/AirportItlwm-HighSierra
+      mv Mojave $DIR/AirportItlwm-Mojave
 
 - task: Bash@3
   displayName: Get Latest Changes From itlwm
@@ -126,12 +130,13 @@ steps:
       echo "##vso[task.setvariable variable=BuildDate]$BD"
 
 - task: Bash@3
-  displayName: Prepare Release Zip File
+  displayName: Prepare Release Zip Files
   inputs:
     targetType: 'inline'
     script: |
       #!/bin/bash
-      zip -r HeliPort-itlwm.zip HeliPort-itlwm
+      zip -r HeliPort.zip HeliPort
+      zip -r itlwm.zip itlwm
       zip -r AirportItlwmAllVersions.zip AirportItlwmAllVersions
 
 
