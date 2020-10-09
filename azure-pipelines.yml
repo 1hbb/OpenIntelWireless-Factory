@@ -26,7 +26,12 @@ steps:
     script: |
       #!/bin/bash
       DIR=$PWD
-      mkdir "HeliPort-itlwm"
+      mkdir "HeliPort"
+      mkdir "itlwm"
+      mkdir "AirportItlwm-HighSierra"
+      mkdir "AirportItlwm-Mojave"
+      mkdir "AirportItlwm-Catalina"
+      mkdir "AirportItlwm-BigSur"
       git clone https://github.com/OpenIntelWireless/HeliPort.git
       cd HeliPort
       pod install
@@ -43,7 +48,7 @@ steps:
       xcodebuild -workspace HeliPort.xcworkspace -scheme HeliPort -sdk macosx -configuration Release archive -archivePath $PWD/build/HeliPort.xcarchive
       cd $PWD/build/HeliPort.xcarchive/Products/Applications/
       pwd
-      mv HeliPort.app $DIR/HeliPort-itlwm
+      mv HeliPort.app $DIR/HeliPort
 
 
 - task: Bash@3
@@ -74,28 +79,33 @@ steps:
 
 
 - task: Bash@3
-  displayName: Install macOS 10.12 SDK
+  displayName: Install SDK
   inputs:
     targetType: 'inline'
     script: |
       #!/bin/bash
-      curl -L https://github.com/alexey-lysiuk/macos-sdk/releases/download/10.12/MacOSX10.12.tar.bz2 -o /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.tar.bz2 && tar -xjf /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.tar.bz2 -C /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/
+      cd itlwm
+      git clone https://github.com/acidanthera/MacKernelSDK.git
 
 
 
 - task: Bash@3
-  displayName: Build itlwm
+  displayName: Build itlwm and AirportItlwm
   inputs:
     targetType: 'inline'
     script: |
       #!/bin/bash
       DIR=$PWD
       cd itlwm
-      xcodebuild -project itlwm.xcodeproj -target fw_gen -configuration Release -sdk macosx10.12
-      xcodebuild -project itlwm.xcodeproj -target itlwm -configuration Release -sdk macosx10.12
+      xcodebuild -project itlwm.xcodeproj -target fw_gen -configuration Release
+      xcodebuild -project itlwm.xcodeproj -alltargets -configuration Release
       cd build/Release
       ls
-      mv itlwm.kext $DIR/HeliPort-itlwm
+      mv itlwm.kext $DIR/itlwm
+      mv Big\ Sur $DIR/AirportItlwm-BigSur
+      mv Catalina $DIR/AirportItlwm-Catalina
+      mv High\ Sierra $DIR/AirportItlwm-HighSierra
+      mv Mojave $DIR/AirportItlwm-Mojave
 
 - task: Bash@3
   displayName: Get Latest Changes From itlwm
@@ -120,12 +130,17 @@ steps:
       echo "##vso[task.setvariable variable=BuildDate]$BD"
 
 - task: Bash@3
-  displayName: Prepare Release Zip File
+  displayName: Prepare Release Zip Files
   inputs:
     targetType: 'inline'
     script: |
       #!/bin/bash
-      zip -r HeliPort-itlwm.zip HeliPort-itlwm
+      zip -r HeliPort.zip HeliPort
+      zip -r itlwm.zip itlwm
+      zip -r AirportItlwm-Catalina.zip AirportItlwm-Catalina
+      zip -r AirportItlwm-BigSur.zip AirportItlwm-BigSur
+      zip -r AirportItlwm-Mojave.zip AirportItlwm-Mojave
+      zip -r AirportItlwm-HighSierra.zip AirportItlwm-HighSierra
 
 
 - task: GitHubRelease@1
