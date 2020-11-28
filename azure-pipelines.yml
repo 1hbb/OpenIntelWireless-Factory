@@ -35,7 +35,6 @@ steps:
       git clone https://github.com/OpenIntelWireless/HeliPort.git
       cd HeliPort
       pod install
-      brew install swiftlint
 
 - task: Bash@3
   displayName: Build HeliPort
@@ -45,7 +44,7 @@ steps:
       #!/bin/bash
       DIR=$PWD
       cd HeliPort
-      xcodebuild -workspace HeliPort.xcworkspace -scheme HeliPort -sdk macosx -configuration Release archive -archivePath $PWD/build/HeliPort.xcarchive
+      xcodebuild -workspace HeliPort.xcworkspace -scheme HeliPort -configuration Release archive -archivePath $PWD/build/HeliPort.xcarchive
       cd $PWD/build/HeliPort.xcarchive/Products/Applications/
       pwd
       mv HeliPort.app $DIR/HeliPortApp
