@@ -15,7 +15,7 @@ schedules:
   always: true
 
 pool:
-  vmImage: 'macos-latest'
+  vmImage: 'macos-10.15'
 
 steps:
 
@@ -35,17 +35,17 @@ steps:
       git clone https://github.com/OpenIntelWireless/HeliPort.git
       cd HeliPort
       pod install
-      brew install swiftlint
 
 - task: Bash@3
   displayName: Build HeliPort
   inputs:
     targetType: 'inline'
     script: |
+      sudo xcode-select -s "/Applications/Xcode_12.2.app"
       #!/bin/bash
       DIR=$PWD
       cd HeliPort
-      xcodebuild -workspace HeliPort.xcworkspace -scheme HeliPort -sdk macosx -configuration Release archive -archivePath $PWD/build/HeliPort.xcarchive
+      xcodebuild -workspace HeliPort.xcworkspace -scheme HeliPort -configuration Release archive -archivePath $PWD/build/HeliPort.xcarchive
       cd $PWD/build/HeliPort.xcarchive/Products/Applications/
       pwd
       mv HeliPort.app $DIR/HeliPortApp
