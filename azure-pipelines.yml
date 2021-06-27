@@ -32,6 +32,7 @@ steps:
       mkdir "AirportItlwm-Mojave"
       mkdir "AirportItlwm-Catalina"
       mkdir "AirportItlwm-BigSur"
+      mkdir "AirportItlwm-Monterey"
       git clone https://github.com/OpenIntelWireless/HeliPort.git
       cd HeliPort
       pod install
@@ -103,6 +104,7 @@ steps:
       ls
       mv itlwm.kext $DIR/itlwmkext
       mv Big\ Sur $DIR/AirportItlwm-BigSur
+      mv Monterey $DIR/AirportItlwm-Monterey
       mv Catalina $DIR/AirportItlwm-Catalina
       mv High\ Sierra $DIR/AirportItlwm-HighSierra
       mv Mojave $DIR/AirportItlwm-Mojave
@@ -139,6 +141,7 @@ steps:
       zip -r itlwmkext.zip itlwmkext
       zip -r AirportItlwm-Catalina.zip AirportItlwm-Catalina
       zip -r AirportItlwm-BigSur.zip AirportItlwm-BigSur
+      zip -r AirportItlwm-Monterey.zip AirportItlwm-Monterey
       zip -r AirportItlwm-Mojave.zip AirportItlwm-Mojave
       zip -r AirportItlwm-HighSierra.zip AirportItlwm-HighSierra
 
